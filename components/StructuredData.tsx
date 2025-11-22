@@ -5,8 +5,8 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Stash Labs",
-    "url": "https://stashlabs.com.au",
-    "logo": "https://stashlabs.com.au/android-chrome-512x512.png",
+    "url": "https://www.stashlabs.com.au",
+    "logo": "https://www.stashlabs.com.au/android-chrome-512x512.png",
     "description": "Three students who code, solving real problems for Australian small businesses. We build LifeCycle and TimeTally - practical SaaS tools for Australian SMBs.",
     "address": {
       "@type": "PostalAddress",

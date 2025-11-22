@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://stashlabs.com.au/sitemap.xml',
+    sitemap: 'https://www.stashlabs.com.au/sitemap.xml',
   };
 }

@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://stashlabs.com.au';
+  const baseUrl = 'https://www.stashlabs.com.au';
 
   return [
     {

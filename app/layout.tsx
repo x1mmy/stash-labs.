@@ -11,14 +11,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Stash Labs" }],
   creator: "Stash Labs",
   publisher: "Stash Labs",
-  metadataBase: new URL("https://stashlabs.com.au"),
+  metadataBase: new URL("https://www.stashlabs.com.au"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Stash Labs | Building the tech we wished existed",
     description: "Three students who code, solving real problems for Australian small businesses.",
-    url: "https://stashlabs.com.au",
+    url: "https://www.stashlabs.com.au",
     siteName: "Stash Labs",
     locale: "en_AU",
     type: "website",
