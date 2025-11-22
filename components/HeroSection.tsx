@@ -77,7 +77,7 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               Building the tech{' '}
-              <span className="relative inline-block whitespace-nowrap">
+              <span className="relative inline-block md:whitespace-nowrap">
                 <span className="relative z-10 bg-gradient-to-r from-white via-neutral-200 to-white bg-clip-text text-transparent">
                   we wished existed<span className="text-stash-orange">.</span>
                 </span>

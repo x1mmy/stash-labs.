@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export function Header() {
   return (
@@ -12,15 +13,25 @@ export function Header() {
     >
       <div className="container mx-auto px-6 lg:px-12 py-6">
         <div className="flex items-center justify-between">
-          <motion.div
-            className="text-2xl font-bold tracking-tight"
+          <motion.a
+            href="/"
+            className="flex items-center gap-3 text-2xl font-bold tracking-tight"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <span className="text-white">Stash Labs</span>
-            <span className="text-stash-orange">.</span>
-          </motion.div>
+            <Image
+              src="/apple-touch-icon.png"
+              alt="Stash Labs Logo"
+              width={40}
+              height={40}
+              className="rounded-lg"
+            />
+            <div>
+              <span className="text-white">Stash Labs</span>
+              <span className="text-stash-orange">.</span>
+            </div>
+          </motion.a>
 
           <motion.nav
             className="hidden md:flex items-center gap-8"
