@@ -32,6 +32,9 @@ export function WhatWeDoSection() {
               We build practical SaaS tools for Australian SMBs—because we saw problems that needed fixing,
               and we had the skills to fix them properly.
             </p>
+            <p>
+              We also build websites for businesses that need a proper online presence—without the agency price tag or the 3-month timeline.
+            </p>
             <p className="text-neutral-500 italic">
               Simple, effective software built by people who actually understand the problem.
             </p>
