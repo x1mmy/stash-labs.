@@ -65,7 +65,7 @@ export function CTASection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Whether you're interested in LifeCycle, TimeTally, or just want to chat about
+              Whether you're interested in LifeCycle, TimeTally, need a website built, or just want to chat about
               what we're building—get in touch.
             </motion.p>
 
