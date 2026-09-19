@@ -2,80 +2,256 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --font-epilogue: 'Epilogue', system-ui, sans-serif;
-  --cursor-x: 50%;
-  --cursor-y: 50%;
+:root,
+[data-theme="paper"] {
+  --bg: #f2eee7;
+  --surface: #fbf9f5;
+  --surface-2: #e7e0d5;
+  --ink: #16130f;
+  --ink-2: #5a544c;
+  --ink-3: #6e675d;
+  --line: rgba(22, 19, 15, 0.14);
+  --line-strong: rgba(22, 19, 15, 0.28);
+  --accent: #e5522a;
+  --accent-ink: #ffffff;
+  --tt: #2563eb;
+  --lc: #1f9d55;
+}
+
+[data-theme="ink"] {
+  --bg: #0c0b0a;
+  --surface: #141210;
+  --surface-2: #242019;
+  --ink: #f4f1eb;
+  --ink-2: #9d958c;
+  --ink-3: #8e877e;
+  --line: rgba(244, 241, 235, 0.12);
+  --line-strong: rgba(244, 241, 235, 0.24);
+  --accent: #ff6b35;
+  --accent-ink: #0c0b0a;
+  --tt: #60a5fa;
+  --lc: #4ade80;
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
+    background: var(--bg);
   }
 
   body {
-    @apply font-epilogue bg-neutral-950 text-neutral-100;
-    background: radial-gradient(
-      600px circle at var(--cursor-x) var(--cursor-y),
-      rgba(255, 107, 53, 0.08),
-      transparent 40%
-    ),
-    linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
-    background-attachment: fixed;
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  /* One focus ring for the whole site: the studio accent, never the browser's
+     default blue, which clashed with every surface here. */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .gradient-mesh {
-    background: radial-gradient(
-      at 27% 37%,
-      rgba(255, 107, 53, 0.12) 0px,
-      transparent 50%
-    ),
-    radial-gradient(at 97% 21%, rgba(255, 107, 53, 0.08) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, rgba(30, 30, 30, 0.4) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, rgba(20, 20, 20, 0.5) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, rgba(40, 40, 40, 0.3) 0px, transparent 50%),
-    radial-gradient(at 33% 50%, rgba(25, 25, 25, 0.4) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, rgba(15, 15, 15, 0.5) 0px, transparent 50%);
+@layer components {
+  /* The 1240px content column + the design's 28px / 20px responsive gutter. */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 min-[681px]:px-7;
   }
 }
 
-/* Custom scrollbar for dark mode */
+/* Reveal on scroll - armed by ScrollFx so no-JS still renders content. */
+[data-reveal] {
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-reveal].armed {
+  opacity: 0;
+  transform: translateY(28px);
+}
+[data-reveal].in {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fillRow {
+  0% {
+    transform: scaleX(0);
+  }
+  26% {
+    transform: scaleX(1);
+  }
+  86% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+@keyframes popTick {
+  0%,
+  24% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  34% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  86% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+@keyframes sweepX {
+  0% {
+    transform: translateX(-60%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+@keyframes driftUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes typeLine {
+  0% {
+    width: 0;
+  }
+  18% {
+    width: 100%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes drawRule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal].armed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
-  @apply bg-neutral-900;
+  background: var(--bg);
 }
-
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-700 rounded-full;
+  background: var(--line-strong);
+  border-radius: 999px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-neutral-600;
+/* First-visit entry screen. Hidden unless the boot script flagged this as a
+   first visit, so the markup is safe to ship in the cached static HTML. The
+   orb only mounts once React hydrates; the overlay itself paints immediately.
+   The global prefers-reduced-motion rule collapses the animation to ~0ms,
+   which fires animationend straight away and unmounts it. */
+html:not([data-intro]) .sl-intro {
+  display: none;
 }
 
-/* Smooth cursor tracking */
-* {
-  transition: background-position 0.3s ease;
+.sl-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  animation: sl-intro-out 1.6s ease forwards;
 }
 
-/* Glass morphism utilities */
-.glass {
-  background: rgba(20, 20, 20, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-strong {
-  background: rgba(30, 30, 30, 0.8);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+@keyframes sl-intro-out {
+  0%,
+  65% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
