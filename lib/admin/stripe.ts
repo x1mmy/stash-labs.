@@ -90,8 +90,19 @@ export type Overview = {
     netCollected: Money[];
   };
   revenueByProduct: { name: string; mrr: Money }[];
-  /** Revenue, not MRR - Stripe exposes no MRR history. */
-  trailing12: { label: string; cents: number; currency: string }[];
+  /**
+   * Revenue, not MRR - Stripe exposes no MRR history.
+   *
+   * `balance` is the Stripe balance at the end of that month, reconstructed
+   * from balance transactions, or null when it cannot be trusted.
+   */
+  trailing12: {
+    label: string;
+    period: string;
+    cents: number;
+    currency: string;
+    balance: number | null;
+  }[];
   needsAttention: { label: string; detail: string }[];
 };
 
@@ -108,7 +119,7 @@ export async function getOverview(): Promise<Overview | null> {
     listAll(stripe.subscriptions.list({ status: 'all', limit: 100 })),
     listAll(stripe.invoices.list({ created: { gte: since }, limit: 100 })),
     listAll(
-      stripe.balanceTransactions.list({ created: { gte: mStart }, limit: 100 })
+      stripe.balanceTransactions.list({ created: { gte: since }, limit: 100 })
     ),
     listAll(stripe.products.list({ limit: 100 })),
   ]);
@@ -145,14 +156,33 @@ export async function getOverview(): Promise<Overview | null> {
   }
 
   // Trailing 12 - paid invoices bucketed by when they were paid.
-  const buckets = new Map<string, { label: string; cents: number; currency: string }>();
+  const monthTick = new Intl.DateTimeFormat('en-AU', { month: 'short' });
+  const monthPeriod = new Intl.DateTimeFormat('en-AU', {
+    month: 'short',
+    year: 'numeric',
+  });
+  const buckets = new Map<
+    string,
+    {
+      label: string;
+      period: string;
+      cents: number;
+      currency: string;
+      balance: number | null;
+      end: number;
+    }
+  >();
   for (let i = 11; i >= 0; i--) {
     const d = new Date();
     d.setMonth(d.getMonth() - i, 1);
+    const end = new Date(d.getFullYear(), d.getMonth() + 1, 1).getTime() / 1000;
     buckets.set(`${d.getFullYear()}-${d.getMonth()}`, {
-      label: new Intl.DateTimeFormat('en-AU', { month: 'short' }).format(d),
+      label: monthTick.format(d),
+      period: monthPeriod.format(d),
       cents: 0,
       currency: 'aud',
+      balance: null,
+      end,
     });
   }
   for (const inv of invoices) {
@@ -166,11 +196,42 @@ export async function getOverview(): Promise<Overview | null> {
     }
   }
 
+  /**
+   * Stripe has no balance history endpoint, so each month's closing balance is
+   * today's balance wound backwards through the balance transactions since.
+   *
+   * It is left null when the answer would be a guess: when the transaction list
+   * hit its cap (older months would be missing, and the wind-back would be
+   * short by whatever fell off the end), or for months that closed before the
+   * window the transactions cover.
+   */
+  const balanceCurrency = (balance.available[0]?.currency ?? 'aud').toLowerCase();
+  const balanceNow =
+    [...balance.available, ...balance.pending]
+      .filter((b) => b.currency.toLowerCase() === balanceCurrency)
+      .reduce((total, b) => total + b.amount, 0);
+  const txnsComplete = txns.length < CAP;
+  if (txnsComplete) {
+    const relevant = txns.filter(
+      (t) => t.currency.toLowerCase() === balanceCurrency
+    );
+    for (const bucket of buckets.values()) {
+      // Everything that landed after this month closed, undone.
+      if (bucket.end <= since) continue;
+      const after = relevant
+        .filter((t) => t.created >= bucket.end)
+        .reduce((total, t) => total + t.net, 0);
+      bucket.balance = balanceNow - after;
+    }
+  }
+
   const mtd = invoices.filter((i) => (i.created ?? 0) >= mStart);
   const outstanding = invoices.filter(
     (i) => i.status === 'open' && i.amount_remaining > 0
   );
-  const fees = sumByCurrency(txns.map((t) => money(t.fee, t.currency)));
+  const fees = sumByCurrency(
+    txns.filter((t) => t.created >= mStart).map((t) => money(t.fee, t.currency))
+  );
   const collected = sumByCurrency(
     mtd.filter((i) => i.amount_paid > 0).map((i) => money(i.amount_paid, i.currency))
   );
@@ -230,7 +291,7 @@ export async function getOverview(): Promise<Overview | null> {
     revenueByProduct: [...byProduct.values()]
       .map((r) => ({ name: r.name, mrr: money(Math.round(r.cents), r.currency) }))
       .sort((a, b) => b.mrr.cents - a.mrr.cents),
-    trailing12: [...buckets.values()],
+    trailing12: [...buckets.values()].map(({ end: _end, ...point }) => point),
     needsAttention,
   };
 }

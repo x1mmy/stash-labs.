@@ -1,9 +1,9 @@
+import { LineChart } from '@/components/admin/LineChart';
 import {
   EmptyState,
   Figure,
   Metric,
   MetricStrip,
-  LineChart,
   MoneyList,
   PageHeader,
   Panel,
