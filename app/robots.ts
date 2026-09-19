@@ -5,6 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: '/admin',
     },
     sitemap: 'https://www.stashlabs.com.au/sitemap.xml',
   };

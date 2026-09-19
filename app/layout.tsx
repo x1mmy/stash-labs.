@@ -1,23 +1,55 @@
 import type { Metadata } from "next";
-import "./globals.css";
-import { CursorTracker } from "@/components/CursorTracker";
-import { StructuredData } from "@/components/StructuredData";
+import { Epilogue, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import "./globals.css";
+import { StructuredData } from "@/components/StructuredData";
+import { Intro } from "@/components/Intro";
+
+const epilogue = Epilogue({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-epilogue",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
+const description =
+  "Stash Labs is a three-person software studio in Sydney. We build products for Australian small businesses, and websites for the businesses that need one properly.";
 
 export const metadata: Metadata = {
-  title: "Stash Labs | Building the tech we wished existed",
-  description: "Three students who code, solving real problems for Australian small businesses. We build LifeCycle and TimeTally - practical SaaS tools for Australian SMBs.",
-  keywords: ["Stash Labs", "LifeCycle", "TimeTally", "Australian SaaS", "SMB software", "expiry tracking", "payroll software", "Sydney startups"],
+  title: "Stash Labs | Software for the businesses that keep the lights on",
+  description,
+  keywords: [
+    "Stash Labs",
+    "TimeTally",
+    "Australian SaaS",
+    "SMB software",
+    "payroll software",
+    "Sydney software studio",
+    "small business websites",
+  ],
   authors: [{ name: "Stash Labs" }],
   creator: "Stash Labs",
   publisher: "Stash Labs",
   metadataBase: new URL("https://www.stashlabs.com.au"),
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Stash Labs | Building the tech we wished existed",
-    description: "Three students who code, solving real problems for Australian small businesses.",
+    title: "Stash Labs | Software for the businesses that keep the lights on",
+    description,
     url: "https://www.stashlabs.com.au",
     siteName: "Stash Labs",
     locale: "en_AU",
@@ -33,8 +65,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stash Labs | Building the tech we wished existed",
-    description: "Three students who code, solving real problems for Australian small businesses.",
+    title: "Stash Labs | Software for the businesses that keep the lights on",
+    description,
     images: ["/android-chrome-512x512.png"],
   },
   robots: {
@@ -53,32 +85,35 @@ export const metadata: Metadata = {
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    other: [
-      { rel: "icon", url: "/favicon.ico" },
-    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    other: [{ rel: "icon", url: "/favicon.ico" }],
   },
   manifest: "/site.webmanifest",
 };
 
+// Light ("paper") is the default for everyone; only an explicit saved choice
+// switches it. Runs before paint so that choice never flashes paper first.
+const themeBoot = `(function(){try{var d=document.documentElement,k=localStorage.getItem('sl-theme')==='ink';d.setAttribute('data-theme',k?'ink':'paper');d.classList.add(k?'dark':'light');}catch(e){}})();`;
+
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html
+      lang="en-AU"
+      data-theme="paper"
+      className={`${epilogue.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
-        <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <script dangerouslySetInnerHTML={{ __html: themeBoot }} />
         <StructuredData />
       </head>
-      <body className="font-epilogue antialiased bg-neutral-950 text-neutral-100">
-        {/* Google Analytics 4 */}
+      <body className="overflow-x-hidden font-sans">
+        <Intro />
         {GA_ID && (
           <>
             <Script
@@ -100,7 +135,6 @@ export default function RootLayout({
           </>
         )}
 
-        {/* Google Tag Manager - noscript */}
         {GTM_ID && (
           <noscript>
             <iframe
@@ -112,7 +146,6 @@ export default function RootLayout({
           </noscript>
         )}
 
-        {/* Google Tag Manager - script */}
         {GTM_ID && (
           <Script
             id="gtm-script"
@@ -129,7 +162,6 @@ export default function RootLayout({
           />
         )}
 
-        <CursorTracker />
         {children}
       </body>
     </html>
