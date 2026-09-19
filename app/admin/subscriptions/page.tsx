@@ -12,8 +12,6 @@ import {
 import { formatDate, formatMoney } from '@/lib/admin/format';
 import { getSubscriptions, type SubscriptionRow } from '@/lib/admin/stripe';
 
-export const revalidate = 300;
-
 const COLUMNS: Column<SubscriptionRow>[] = [
   {
     key: 'client',

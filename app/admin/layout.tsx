@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
+// Stripe is live per request. ISR would prerender these at build time and
+// fail the deploy whenever the API is unreachable or the key is missing.
+export const dynamic = 'force-dynamic';
+
 // The root layout already sets data-theme before paint and renders the global
 // theme toggle, so these screens inherit both with no code of their own.
 export default function AdminLayout({

@@ -13,8 +13,6 @@ import {
 import { formatDate, formatMoney } from '@/lib/admin/format';
 import { getClient } from '@/lib/admin/stripe';
 
-export const revalidate = 300;
-
 export default async function ClientDetailPage({
   params,
 }: {

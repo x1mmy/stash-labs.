@@ -10,8 +10,6 @@ import {
 import { formatDate, formatMoney, sumByCurrency } from '@/lib/admin/format';
 import { getLedger, type LedgerRow } from '@/lib/admin/stripe';
 
-export const revalidate = 300;
-
 const FILTERS = [
   { key: 'all', label: 'All' },
   { key: 'in', label: 'In' },

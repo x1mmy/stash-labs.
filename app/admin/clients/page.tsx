@@ -11,8 +11,6 @@ import {
 import { formatMoney, sumByCurrency } from '@/lib/admin/format';
 import { getClients, type ClientRow } from '@/lib/admin/stripe';
 
-export const revalidate = 300;
-
 const COLUMNS: Column<ClientRow>[] = [
   {
     key: 'client',
