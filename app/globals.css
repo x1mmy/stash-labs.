@@ -225,15 +225,8 @@
   border-radius: 999px;
 }
 
-/* First-visit entry screen. Hidden unless the boot script flagged this as a
-   first visit, so the markup is safe to ship in the cached static HTML. The
-   orb only mounts once React hydrates; the overlay itself paints immediately.
-   The global prefers-reduced-motion rule collapses the animation to ~0ms,
-   which fires animationend straight away and unmounts it. */
-html:not([data-intro]) .sl-intro {
-  display: none;
-}
-
+/* Entry overlay on every load. Overlay paints from SSR; orb mounts on hydrate.
+   prefers-reduced-motion collapses the animation to ~0ms → animationend → unmount. */
 .sl-intro {
   position: fixed;
   inset: 0;
@@ -242,12 +235,18 @@ html:not([data-intro]) .sl-intro {
   align-items: center;
   justify-content: center;
   background: var(--bg);
-  animation: sl-intro-out 1.6s ease forwards;
+  animation: sl-intro-out 2.6s ease forwards;
+}
+
+/* thinking-orbs is monochrome only — recolor the canvas dots to studio orange. */
+.sl-intro canvas {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(86%) saturate(2140%)
+    hue-rotate(346deg) brightness(97%) contrast(94%);
 }
 
 @keyframes sl-intro-out {
   0%,
-  65% {
+  72% {
     opacity: 1;
   }
   100% {

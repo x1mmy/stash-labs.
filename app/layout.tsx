@@ -93,7 +93,7 @@ export const metadata: Metadata = {
 
 // Light ("paper") is the default for everyone; only an explicit saved choice
 // switches it. Runs before paint so that choice never flashes paper first.
-const themeBoot = `(function(){try{var d=document.documentElement,k=localStorage.getItem('sl-theme')==='ink';d.setAttribute('data-theme',k?'ink':'paper');d.classList.add(k?'dark':'light');if(!sessionStorage.getItem('sl-seen')){sessionStorage.setItem('sl-seen','1');d.setAttribute('data-intro','');}}catch(e){}})();`;
+const themeBoot = `(function(){try{var d=document.documentElement,k=localStorage.getItem('sl-theme')==='ink';d.setAttribute('data-theme',k?'ink':'paper');d.classList.add(k?'dark':'light');}catch(e){}})();`;
 
 export default function RootLayout({
   children,
