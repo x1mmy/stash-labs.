@@ -15,7 +15,8 @@ export function ThemeToggle() {
     }
   }, []);
 
-  const set = (next: Theme) => {
+  const toggle = () => {
+    const next: Theme = theme === 'ink' ? 'paper' : 'ink';
     setTheme(next);
     document.documentElement.setAttribute('data-theme', next);
     // thinking-orbs reads the theme off this class, not our paper/ink names.
@@ -28,30 +29,16 @@ export function ThemeToggle() {
     }
   };
 
+  // The label names the theme you would switch to, not the one you are in.
   return (
-    <div
-      role="group"
-      aria-label="Colour theme"
-      className="flex items-center gap-1 rounded-full border border-line-strong p-1"
+    <button
+      type="button"
+      onClick={toggle}
+      aria-label="Toggle colour theme"
+      className="flex cursor-pointer items-center gap-2 rounded-sm border border-line-strong bg-transparent px-2.5 py-[7px] font-mono text-xs text-ink-2 transition-colors duration-200 hover:border-ink hover:text-ink"
     >
-      {(['paper', 'ink'] as const).map((option) => {
-        const active = theme === option;
-        return (
-          <button
-            key={option}
-            type="button"
-            onClick={() => set(option)}
-            aria-pressed={active}
-            className={`cursor-pointer rounded-full px-3 py-1.5 font-mono text-[11px] uppercase tracking-[.1em] transition-colors ${
-              active
-                ? 'bg-accent text-accent-ink'
-                : 'bg-transparent text-ink-3 hover:text-ink'
-            }`}
-          >
-            {option === 'paper' ? 'Light' : 'Dark'}
-          </button>
-        );
-      })}
-    </div>
+      <span className="h-2 w-2 bg-accent" />
+      {theme === 'ink' ? 'Light' : 'Dark'}
+    </button>
   );
 }

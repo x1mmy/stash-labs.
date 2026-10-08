@@ -18,6 +18,7 @@ test('accepts and trims a valid submission', () => {
     email: 'jordan@business.com.au',
     message: 'Payroll eats my Sundays.',
     business: 'Ellis Plumbing',
+    phone: '',
     topic: 'A website',
   });
 });

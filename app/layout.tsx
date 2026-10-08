@@ -1,46 +1,58 @@
 import type { Metadata } from "next";
-import { Epilogue, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import {
+  Epilogue,
+  IBM_Plex_Mono,
+  IBM_Plex_Sans,
+  Space_Grotesk,
+} from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import { StructuredData } from "@/components/StructuredData";
 import { Intro } from "@/components/Intro";
 
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-plex-sans",
+  display: "swap",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-plex-mono",
+  display: "swap",
+});
+
+// Wordmark only: "stash" at 800, "labs" at 400.
 const epilogue = Epilogue({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "800"],
   variable: "--font-epilogue",
   display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument-serif",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
 const description =
-  "Stash Labs is a three-person software studio in Sydney. We build products for Australian small businesses, and websites for the businesses that need one properly.";
+  "Stash Labs is a small team of Sydney engineers. We sit with your team, learn how the work gets done, then connect the tools you already pay for.";
 
 export const metadata: Metadata = {
-  title: "Stash Labs | Software for the businesses that keep the lights on",
+  title: "Stash Labs | Get back the hours your business loses to admin",
   description,
   keywords: [
     "Stash Labs",
     "TimeTally",
-    "Australian SaaS",
-    "SMB software",
-    "payroll software",
-    "Sydney software studio",
-    "small business websites",
+    "business systems integration",
+    "small business automation",
+    "Xero integration",
+    "Sydney engineers",
+    "digital timesheets",
   ],
   authors: [{ name: "Stash Labs" }],
   creator: "Stash Labs",
@@ -48,7 +60,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.stashlabs.com.au"),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Stash Labs | Software for the businesses that keep the lights on",
+    title: "Stash Labs | Get back the hours your business loses to admin",
     description,
     url: "https://www.stashlabs.com.au",
     siteName: "Stash Labs",
@@ -65,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stash Labs | Software for the businesses that keep the lights on",
+    title: "Stash Labs | Get back the hours your business loses to admin",
     description,
     images: ["/android-chrome-512x512.png"],
   },
@@ -105,7 +117,7 @@ export default function RootLayout({
     <html
       lang="en-AU"
       data-theme="paper"
-      className={`${epilogue.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      className={`${plexSans.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${epilogue.variable}`}
       suppressHydrationWarning
     >
       <head>

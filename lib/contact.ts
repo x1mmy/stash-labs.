@@ -2,6 +2,7 @@ export type ContactPayload = {
   name: string;
   email: string;
   business: string;
+  phone: string;
   message: string;
   topic: string;
 };
@@ -10,6 +11,7 @@ const LIMITS = {
   name: 120,
   email: 200,
   business: 160,
+  phone: 40,
   message: 4000,
   topic: 60,
 } as const;
@@ -50,6 +52,7 @@ export function parseContact(
     email,
     message,
     business: str(b.business, LIMITS.business),
+    phone: str(b.phone, LIMITS.phone),
     topic: str(b.topic, LIMITS.topic) || 'Not sure yet',
   };
 }
