@@ -11,7 +11,7 @@
   --ink-2: #5a544c;
   --ink-3: #6e675d;
   --line: rgba(22, 19, 15, 0.14);
-  --line-strong: rgba(22, 19, 15, 0.28);
+  --line-strong: rgba(22, 19, 15, 0.3);
   --accent: #e5522a;
   --accent-ink: #ffffff;
   --tt: #2563eb;
@@ -23,10 +23,10 @@
   --surface: #141210;
   --surface-2: #242019;
   --ink: #f4f1eb;
-  --ink-2: #9d958c;
+  --ink-2: #a39b91;
   --ink-3: #8e877e;
   --line: rgba(244, 241, 235, 0.12);
-  --line-strong: rgba(244, 241, 235, 0.24);
+  --line-strong: rgba(244, 241, 235, 0.26);
   --accent: #ff6b35;
   --accent-ink: #0c0b0a;
   --tt: #60a5fa;
@@ -67,10 +67,98 @@
 }
 
 @layer components {
-  /* The 1240px content column + the design's 28px / 20px responsive gutter. */
+  /* The 1240px content column + the design's 32px / 16px responsive gutter. */
   .shell {
-    @apply mx-auto w-full max-w-shell px-5 min-[681px]:px-7;
+    @apply mx-auto w-full max-w-shell px-4 min-[761px]:px-8;
   }
+
+  /* Mono label above a section: accent number, then the name. */
+  .eyebrow {
+    @apply font-mono text-xs uppercase tracking-[.08em] text-ink-2;
+  }
+
+  .h2 {
+    @apply m-0 text-balance font-display text-[clamp(28px,3.4vw,44px)] font-medium leading-[1.1] tracking-[-.025em];
+  }
+
+  .lede {
+    @apply m-0 text-pretty text-[clamp(17px,1.5vw,20px)] text-ink-2;
+  }
+
+  .section-pad {
+    @apply py-[clamp(72px,9vw,128px)];
+  }
+
+  /* Two columns that collapse to one at the design's 760px breakpoint. */
+  .split {
+    @apply grid gap-[clamp(32px,5vw,80px)] max-[760px]:!grid-cols-[minmax(0,1fr)];
+  }
+
+  .btn-primary {
+    @apply inline-flex cursor-pointer items-center gap-3 rounded-sm border-0 bg-accent px-6 py-4 font-sans text-base font-semibold text-accent-ink;
+    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 0.25s ease;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -10px var(--accent);
+  }
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+  .btn-primary:disabled {
+    @apply cursor-wait opacity-70;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* The arrow inside a link or button nudges along on hover. */
+  .arrow {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  :is(a, button):hover > .arrow {
+    transform: translateX(5px);
+  }
+
+  /* A 1px rule that wipes in under nav, footer and mailto links. */
+  .link-rule {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, background-size 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .link-rule:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* Hairline figures take their palette from the theme tokens, so they flip
+   with the theme without being remounted. */
+[data-hairline] {
+  --hairline-hi: var(--accent);
+  --hairline-edge: var(--ink);
+  --hairline-mid: var(--ink-2);
+  --hairline-lo: var(--line-strong);
+  --hairline-stroke: 1;
+}
+
+/* Logo: the accent fold flips and the full stop hops when the lockup is hovered. */
+.logo-fold {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.logo-stop {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s;
+}
+.logo:hover .logo-fold {
+  transform: scaleY(-1);
+}
+.logo:hover .logo-stop {
+  transform: translateY(-3px) rotate(-12deg);
 }
 
 /* Reveal on scroll - armed by ScrollFx so no-JS still renders content. */
@@ -97,14 +185,6 @@
     transform: none;
   }
 }
-@keyframes ticker {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
 @keyframes blink {
   0%,
   45% {
@@ -116,76 +196,6 @@
   }
   100% {
     opacity: 1;
-  }
-}
-@keyframes fillRow {
-  0% {
-    transform: scaleX(0);
-  }
-  26% {
-    transform: scaleX(1);
-  }
-  86% {
-    transform: scaleX(1);
-  }
-  100% {
-    transform: scaleX(0);
-  }
-}
-@keyframes popTick {
-  0%,
-  24% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  34% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  86% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-}
-@keyframes sweepX {
-  0% {
-    transform: translateX(-60%);
-  }
-  100% {
-    transform: translateX(220%);
-  }
-}
-@keyframes driftUp {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-50%);
-  }
-}
-@keyframes caret {
-  0%,
-  49% {
-    opacity: 1;
-  }
-  50%,
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes typeLine {
-  0% {
-    width: 0;
-  }
-  18% {
-    width: 100%;
-  }
-  100% {
-    width: 100%;
   }
 }
 @keyframes drawRule {
@@ -225,8 +235,8 @@
   border-radius: 999px;
 }
 
-/* Entry overlay on every load. Overlay paints from SSR; orb mounts on hydrate.
-   prefers-reduced-motion collapses the animation to ~0ms → animationend → unmount. */
+/* Entry overlay on every load: the logo assembles, holds, then the overlay
+   fades. Intro unmounts it when the fade ends. */
 .sl-intro {
   position: fixed;
   inset: 0;
@@ -235,22 +245,92 @@
   align-items: center;
   justify-content: center;
   background: var(--bg);
-  animation: sl-intro-out 2.6s ease forwards;
+  color: var(--ink);
+  animation: ldOut 0.5s ease 2.2s forwards;
+}
+.sl-intro polygon {
+  transform-box: fill-box;
+}
+[data-ld="1"] {
+  animation: ldInR 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+[data-ld="2"] {
+  transform-origin: 50% 0%;
+  animation: ldUnfold 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) 0.38s both;
+}
+[data-ld="3"] {
+  animation: ldInL 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) 0.56s both;
+}
+[data-ld="4"] {
+  animation: ldRise 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both;
+}
+[data-ld="5"] {
+  transform-origin: 50% 100%;
+  animation: ldDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.45s both;
 }
 
-/* thinking-orbs is monochrome only — recolor the canvas dots to studio orange. */
-.sl-intro canvas {
-  filter: brightness(0) saturate(100%) invert(42%) sepia(86%) saturate(2140%)
-    hue-rotate(346deg) brightness(97%) contrast(94%);
+@keyframes ldInR {
+  from {
+    transform: translateX(70px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
 }
-
-@keyframes sl-intro-out {
-  0%,
-  72% {
+@keyframes ldInL {
+  from {
+    transform: translateX(-70px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes ldUnfold {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes ldRise {
+  from {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes ldDrop {
+  0% {
+    transform: translateY(-60px) rotate(-20deg);
+    opacity: 0;
+  }
+  30% {
     opacity: 1;
   }
   100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes ldOut {
+  to {
     opacity: 0;
     visibility: hidden;
+  }
+}
+
+/* The global reduced-motion rule shortens durations but not delays, so the
+   overlay would sit there for 2s doing nothing. Skip it outright. */
+@media (prefers-reduced-motion: reduce) {
+  .sl-intro {
+    display: none;
   }
 }

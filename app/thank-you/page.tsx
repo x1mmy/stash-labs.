@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
+import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 export const metadata: Metadata = {
@@ -51,28 +51,10 @@ export default function ThankYou({
     .toUpperCase();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col text-[17px] leading-[1.6]">
       <header className="border-b border-line">
-        <div className="shell flex items-center justify-between gap-4 py-[18px]">
-          <a
-            href="/"
-            className="group flex items-center gap-2.5 text-[19px] font-semibold tracking-[-.02em] text-ink"
-          >
-            <Image
-              src="/android-chrome-512x512.png"
-              alt=""
-              width={30}
-              height={30}
-              className="block h-[30px] w-[30px] rounded-lg transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:-rotate-[6deg]"
-              priority
-            />
-            <span className="flex items-baseline gap-0.5">
-              Stash Labs
-              <span className="inline-block origin-bottom text-accent transition-transform duration-500 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.6]">
-                .
-              </span>
-            </span>
-          </a>
+        <div className="shell flex items-center justify-between gap-4 py-4">
+          <Logo href="/" />
           <span className="font-mono text-[11.5px] uppercase tracking-[.09em] text-ink-2">
             Sydney, AU
           </span>
@@ -87,9 +69,9 @@ export default function ThankYou({
           <span>{stamp}</span>
         </div>
 
-        <h1 className="m-0 mb-[clamp(24px,3vw,40px)] max-w-[16ch] text-balance text-[clamp(40px,7.4vw,104px)] font-semibold leading-[.95] tracking-[-.035em] [animation:riseIn_.9s_cubic-bezier(.16,1,.3,1)_.1s_both]">
+        <h1 className="m-0 mb-[clamp(24px,3vw,40px)] max-w-[16ch] text-balance font-display text-[clamp(40px,7.4vw,104px)] font-medium leading-[.95] tracking-[-.035em] [animation:riseIn_.9s_cubic-bezier(.16,1,.3,1)_.1s_both]">
           Thanks{name ? `, ${name}` : ''}. It landed with{' '}
-          <span className="font-serif font-normal italic">all three of us</span>
+          all three of us
           <span className="text-accent">.</span>
         </h1>
 
@@ -121,7 +103,7 @@ export default function ThankYou({
                 <span className="font-mono text-xs text-accent">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h2 className="m-0 text-[clamp(19px,2.1vw,26px)] font-semibold leading-[1.2] tracking-[-.02em]">
+                <h2 className="m-0 font-display text-[clamp(19px,2.1vw,26px)] font-medium leading-[1.2] tracking-[-.02em]">
                   {step.title}
                 </h2>
                 <p className="m-0 text-base leading-[1.6] text-ink-2 max-[680px]:col-start-2">
@@ -133,7 +115,7 @@ export default function ThankYou({
         </div>
 
         <div className="mt-[clamp(48px,7vw,110px)] border-t border-line pt-[clamp(28px,4vw,48px)] [animation:riseIn_.9s_cubic-bezier(.16,1,.3,1)_.46s_both]">
-          <p className="m-0 mb-[clamp(26px,3.5vw,40px)] max-w-[28ch] font-serif text-[clamp(22px,2.6vw,34px)] leading-[1.25] tracking-[-.01em]">
+          <p className="m-0 mb-[clamp(26px,3.5vw,40px)] max-w-[28ch] font-display text-[clamp(22px,2.6vw,34px)] font-medium leading-[1.25] tracking-[-.01em]">
             While you wait, the thing we are building right now.
           </p>
           <div className="flex flex-wrap items-center gap-3.5">
@@ -141,21 +123,21 @@ export default function ThankYou({
               href="https://www.timetally.com.au/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full bg-accent px-[30px] py-4 text-base font-semibold text-accent-ink transition-transform hover:-translate-y-0.5 max-[680px]:flex-[1_1_100%] max-[680px]:justify-center"
+              className="btn-primary max-[680px]:flex-[1_1_100%] max-[680px]:justify-center"
             >
-              See TimeTally <span className="font-mono">↗</span>
+              See TimeTally <span aria-hidden="true">↗</span>
             </a>
             <a
               href="/"
-              className="inline-flex items-center gap-2.5 rounded-full border border-line-strong px-[30px] py-4 text-base font-semibold text-ink transition-colors hover:bg-surface max-[680px]:flex-[1_1_100%] max-[680px]:justify-center"
+              className="inline-flex items-center gap-2.5 rounded-sm border border-line-strong px-6 py-4 text-base font-semibold text-ink transition-colors hover:border-ink max-[680px]:flex-[1_1_100%] max-[680px]:justify-center"
             >
-              Back to the studio
+              Back to the site
             </a>
           </div>
         </div>
       </main>
 
-      <footer className="border-t border-line bg-surface">
+      <footer className="border-t border-line">
         <div className="shell flex flex-wrap items-center justify-between gap-4 py-[clamp(28px,4vw,44px)] font-mono text-[11.5px] text-ink-3">
           <span>© {new Date().getFullYear()} Stash Labs · Sydney, Australia</span>
           <div className="flex flex-wrap items-center gap-[22px]">
