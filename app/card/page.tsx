@@ -4,10 +4,32 @@ import { Logo } from '@/components/Logo';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { CARD, CARD_PATH } from '@/lib/card';
 
+const title = 'Stash Labs | Contact card';
+const description = `Save Stash Labs to your contacts. ${CARD.blurb}`;
+
 export const metadata: Metadata = {
   title: 'Contact card | Stash Labs',
-  description: `Save Stash Labs to your contacts. ${CARD.blurb}`,
+  description,
   alternates: { canonical: CARD_PATH },
+  // Spelled out in full because a page's openGraph replaces the layout's, it
+  // does not merge. This is the preview a shared link shows in Messages.
+  openGraph: {
+    title,
+    description,
+    url: CARD_PATH,
+    siteName: 'Stash Labs',
+    locale: 'en_AU',
+    type: 'website',
+    images: [
+      { url: '/android-chrome-512x512.png', width: 512, height: 512, alt: 'Stash Labs' },
+    ],
+  },
+  twitter: {
+    card: 'summary',
+    title,
+    description,
+    images: ['/android-chrome-512x512.png'],
+  },
 };
 
 /** The standalone card. This is the page an NFC tap or a shared link lands on. */

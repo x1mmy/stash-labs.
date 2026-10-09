@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import { ContactCardActions } from '@/components/ContactCardActions';
 import { LogoMark } from '@/components/Logo';
-import { CARD, VCARD_PATH } from '@/lib/card';
+import { CARD } from '@/lib/card';
 
 const rowClass = 'flex justify-between gap-4 border-t border-line py-3';
 const valueClass = 'link-rule font-mono text-[12.5px] text-ink';
@@ -69,21 +69,7 @@ export function ContactCard({ heading: Heading = 'h2' }: { heading?: 'h1' | 'h2'
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        {/* A plain link, no download attribute: phones open the .vcf in Contacts. */}
-        <a href={VCARD_PATH} className="btn-primary flex-1 justify-center whitespace-nowrap">
-          Save contact{' '}
-          <span aria-hidden="true" className="arrow">
-            →
-          </span>
-        </a>
-        <Link
-          href="/#book"
-          className="inline-flex flex-1 items-center justify-center whitespace-nowrap rounded-sm border border-line-strong px-6 py-4 text-base font-semibold text-ink transition-colors hover:border-ink"
-        >
-          Book a chat
-        </Link>
-      </div>
+      <ContactCardActions />
     </div>
   );
 }

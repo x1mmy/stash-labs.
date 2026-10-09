@@ -20,9 +20,17 @@ export const CARD = {
 
 export type Card = typeof CARD;
 
-/** Where the card lives. This is the URL to write to an NFC tag. */
+/** Where the card lives. */
 export const CARD_PATH = '/card';
 export const VCARD_PATH = '/card/stash-labs.vcf';
+export const QR_PATH = '/card/qr.svg';
+
+/**
+ * The card's permanent address: what goes on an NFC tag, in the QR code and
+ * into the share sheet. Always production, so a link shared from a preview
+ * deploy still works next month.
+ */
+export const CARD_URL = `${CARD.url}${CARD_PATH}`;
 
 /** vCard text values treat backslash, comma, semicolon and newline as syntax. */
 const esc = (s: string) =>
