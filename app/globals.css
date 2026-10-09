@@ -133,6 +133,11 @@
   }
 }
 
+/* The page behind an open popup (the contact card) stays put. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* Hairline figures take their palette from the theme tokens, so they flip
    with the theme without being remounted. */
 [data-hairline] {

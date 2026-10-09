@@ -1,3 +1,4 @@
+import { ContactCardButton } from '@/components/ContactCardButton';
 import { Logo } from '@/components/Logo';
 
 const NAV = [
@@ -22,12 +23,15 @@ export function SiteHeader() {
               {item.label}
             </a>
           ))}
-          <a
-            href="#book"
-            className="rounded-sm border border-ink px-3.5 py-[9px] text-ink transition-colors duration-200 hover:bg-ink hover:text-bg"
-          >
-            Book a chat
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="#book"
+              className="whitespace-nowrap rounded-sm border border-ink px-3.5 py-[9px] text-ink max-[480px]:px-2.5 max-[380px]:px-2 transition-colors duration-200 hover:bg-ink hover:text-bg"
+            >
+              Book a chat
+            </a>
+            <ContactCardButton />
+          </div>
         </nav>
       </div>
     </header>
