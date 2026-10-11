@@ -1,11 +1,15 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { CARD_PATH } from '@/lib/card';
 
 /** Full-screen entry overlay on every load. Unmounts when the hold-then-fade ends. */
 export function Intro() {
   const [done, setDone] = useState(false);
-  if (done) return null;
+  // Someone who just tapped an NFC tag wants the card, not two seconds of logo.
+  const skip = usePathname() === CARD_PATH;
+  if (done || skip) return null;
 
   return (
     <div
