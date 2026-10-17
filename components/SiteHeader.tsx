@@ -1,37 +1,33 @@
-import { ContactCardButton } from '@/components/ContactCardButton';
-import { Logo } from '@/components/Logo';
+import { Wordmark } from '@/components/Wordmark';
 
-const NAV = [
-  { href: '#how', label: 'How we work' },
-  { href: '#products', label: 'Products' },
-  { href: '#faq', label: 'FAQ' },
-];
-
-export function SiteHeader() {
+export function SiteHeader({
+  logoHref,
+  links,
+}: {
+  logoHref: string;
+  links: { href: string; label: string }[];
+}) {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-bg">
-      <div className="shell flex items-center justify-between gap-4 py-4">
-        <Logo />
-
-        <nav className="flex items-center gap-7 font-mono text-xs uppercase tracking-[.06em]">
-          {NAV.map((item) => (
+      <div className="shell flex flex-wrap items-center gap-x-4 gap-y-2 py-4">
+        <Wordmark href={logoHref} />
+        <nav className="ml-auto flex items-center gap-7 font-mono text-xs uppercase tracking-[.06em]">
+          {links.map((link) => (
             <a
-              key={item.href}
-              href={item.href}
-              className="link-rule text-ink-2 hover:text-ink max-[760px]:hidden"
+              key={link.href}
+              href={link.href}
+              data-navlink=""
+              className="navlink text-ink-2"
             >
-              {item.label}
+              {link.label}
             </a>
           ))}
-          <div className="flex items-center gap-2">
-            <a
-              href="#book"
-              className="whitespace-nowrap rounded-sm border border-ink px-3.5 py-[9px] text-ink max-[480px]:px-2.5 max-[380px]:px-2 transition-colors duration-200 hover:bg-ink hover:text-bg"
-            >
-              Book a chat
-            </a>
-            <ContactCardButton />
-          </div>
+          <a
+            href="#book"
+            className="book-btn shrink-0 whitespace-nowrap rounded-[2px] border border-ink px-3.5 py-[9px] text-ink transition-colors"
+          >
+            Book a check
+          </a>
         </nav>
       </div>
     </header>

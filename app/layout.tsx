@@ -3,6 +3,8 @@ import {
   Epilogue,
   IBM_Plex_Mono,
   IBM_Plex_Sans,
+  Instrument_Serif,
+  JetBrains_Mono,
   Space_Grotesk,
 } from "next/font/google";
 import Script from "next/script";
@@ -10,10 +12,10 @@ import "./globals.css";
 import { StructuredData } from "@/components/StructuredData";
 import { Intro } from "@/components/Intro";
 
-const plexSans = IBM_Plex_Sans({
+const epilogue = Epilogue({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-plex-sans",
+  weight: ["400", "600", "800"],
+  variable: "--font-epilogue",
   display: "swap",
 });
 
@@ -24,23 +26,37 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-plex-mono",
+  weight: ["400", "500", "600"],
+  variable: "--font-ibm-plex-sans",
   display: "swap",
 });
 
-// Wordmark only: "stash" at 800, "labs" at 400.
-const epilogue = Epilogue({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  weight: ["400", "800"],
-  variable: "--font-epilogue",
+  weight: ["400", "500"],
+  variable: "--font-ibm-plex-mono",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
 const description =
-  "Stash Labs is a small team of Sydney engineers. We sit with your team, learn how the work gets done, then connect the tools you already pay for.";
+  "We find the hours your business loses to admin, and get them back. We sit with your team and connect the tools you already pay for.";
 
 export const metadata: Metadata = {
   title: "Stash Labs | Get back the hours your business loses to admin",
@@ -48,11 +64,11 @@ export const metadata: Metadata = {
   keywords: [
     "Stash Labs",
     "TimeTally",
-    "business systems integration",
-    "small business automation",
-    "Xero integration",
-    "Sydney engineers",
-    "digital timesheets",
+    "Australian SaaS",
+    "SMB software",
+    "payroll software",
+    "Sydney software studio",
+    "small business websites",
   ],
   authors: [{ name: "Stash Labs" }],
   creator: "Stash Labs",
@@ -117,7 +133,7 @@ export default function RootLayout({
     <html
       lang="en-AU"
       data-theme="paper"
-      className={`${plexSans.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${epilogue.variable}`}
+      className={`${epilogue.variable} ${spaceGrotesk.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
       suppressHydrationWarning
     >
       <head>

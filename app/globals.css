@@ -43,8 +43,10 @@
     margin: 0;
     background: var(--bg);
     color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
-    transition: background 0.5s ease, color 0.5s ease;
+    transition: background 0.4s ease, color 0.4s ease;
   }
 
   a {
@@ -67,117 +69,10 @@
 }
 
 @layer components {
-  /* The 1240px content column + the design's 32px / 16px responsive gutter. */
+  /* The 1240px content column. 32px gutter, 16px under 760px. */
   .shell {
-    @apply mx-auto w-full max-w-shell px-4 min-[761px]:px-8;
+    @apply mx-auto w-full max-w-shell px-8 max-[760px]:px-4;
   }
-
-  /* Mono label above a section: accent number, then the name. */
-  .eyebrow {
-    @apply font-mono text-xs uppercase tracking-[.08em] text-ink-2;
-  }
-
-  .h2 {
-    @apply m-0 text-balance font-display text-[clamp(28px,3.4vw,44px)] font-medium leading-[1.1] tracking-[-.025em];
-  }
-
-  .lede {
-    @apply m-0 text-pretty text-[clamp(17px,1.5vw,20px)] text-ink-2;
-  }
-
-  .section-pad {
-    @apply py-[clamp(72px,9vw,128px)];
-  }
-
-  /* Two columns that collapse to one at the design's 760px breakpoint. */
-  .split {
-    @apply grid gap-[clamp(32px,5vw,80px)] max-[760px]:!grid-cols-[minmax(0,1fr)];
-  }
-
-  .btn-primary {
-    @apply inline-flex cursor-pointer items-center gap-3 rounded-sm border-0 bg-accent px-6 py-4 font-sans text-base font-semibold text-accent-ink;
-    transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
-      box-shadow 0.25s ease;
-  }
-  .btn-primary:hover {
-    opacity: 0.9;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px -10px var(--accent);
-  }
-  .btn-primary:active {
-    transform: scale(0.98);
-  }
-  .btn-primary:disabled {
-    @apply cursor-wait opacity-70;
-    transform: none;
-    box-shadow: none;
-  }
-
-  /* The arrow inside a link or button nudges along on hover. */
-  .arrow {
-    display: inline-block;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  :is(a, button):hover > .arrow {
-    transform: translateX(5px);
-  }
-
-  /* A 1px rule that wipes in under nav, footer and mailto links. */
-  .link-rule {
-    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
-    padding-bottom: 2px;
-    transition: color 0.2s ease, background-size 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .link-rule:hover {
-    background-size: 100% 1px;
-  }
-}
-
-/* The page behind an open popup (the contact card) stays put. */
-html:has(dialog[open]) {
-  overflow: hidden;
-}
-
-/* Hairline figures take their palette from the theme tokens, so they flip
-   with the theme without being remounted. */
-[data-hairline] {
-  --hairline-hi: var(--accent);
-  --hairline-edge: var(--ink);
-  --hairline-mid: var(--ink-2);
-  --hairline-lo: var(--line-strong);
-  --hairline-stroke: 1;
-}
-
-/* Logo: the accent fold flips and the full stop hops when the lockup is hovered. */
-.logo-fold {
-  transform-box: fill-box;
-  transform-origin: 50% 50%;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-.logo-stop {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s;
-}
-.logo:hover .logo-fold {
-  transform: scaleY(-1);
-}
-.logo:hover .logo-stop {
-  transform: translateY(-3px) rotate(-12deg);
-}
-
-/* Reveal on scroll - armed by ScrollFx so no-JS still renders content. */
-[data-reveal] {
-  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-[data-reveal].armed {
-  opacity: 0;
-  transform: translateY(28px);
-}
-[data-reveal].in {
-  opacity: 1;
-  transform: none;
 }
 
 @keyframes riseIn {
@@ -223,10 +118,6 @@ html:has(dialog[open]) {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
-  [data-reveal].armed {
-    opacity: 1;
-    transform: none;
-  }
 }
 
 ::-webkit-scrollbar {
@@ -240,12 +131,109 @@ html:has(dialog[open]) {
   border-radius: 999px;
 }
 
-/* Entry overlay on every load: the logo assembles, holds, then the overlay
-   fades. Intro unmounts it when the fade ends. */
+[data-plate] {
+  --hairline-hi: var(--accent);
+  --hairline-edge: var(--ink);
+  --hairline-mid: var(--ink-2);
+  --hairline-lo: var(--line-strong);
+  --hairline-stroke: var(--ink);
+}
+[data-plate="bg"] {
+  --hairline-plate: var(--bg);
+}
+[data-plate="surface"] {
+  --hairline-plate: var(--surface);
+}
+
+[data-fold],
+[data-stop] {
+  transform-box: fill-box;
+}
+[data-fold] {
+  transform-origin: 50% 50%;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+[data-stop] {
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) 0.08s;
+}
+[data-logo]:hover [data-fold] {
+  transform: scaleY(-1);
+}
+[data-logo]:hover [data-stop] {
+  transform: translateY(-3px) rotate(-12deg);
+}
+
+.navlink {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  padding-bottom: 2px;
+  transition: color 0.2s ease, background-size 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.navlink:hover {
+  background-size: 100% 1px;
+  color: var(--ink);
+}
+
+.cta {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.25s ease, opacity 0.2s ease;
+}
+.cta span[aria-hidden="true"] {
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -10px var(--accent);
+}
+.cta:hover span[aria-hidden="true"] {
+  transform: translateX(5px);
+}
+.cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.book-btn:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.sheet-frame {
+  container-type: inline-size;
+}
+.sheet-page {
+  transform: scale(calc(100cqw / 794px));
+}
+
+@keyframes ldInR {
+  from { transform: translateX(70px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes ldInL {
+  from { transform: translateX(-70px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes ldUnfold {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes ldRise {
+  from { transform: translateY(18px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes ldDrop {
+  0% { transform: translateY(-60px) rotate(-20deg); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes ldOut {
+  to { opacity: 0; visibility: hidden; }
+}
+
 .sl-intro {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,86 +244,135 @@ html:has(dialog[open]) {
 .sl-intro polygon {
   transform-box: fill-box;
 }
-[data-ld="1"] {
-  animation: ldInR 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-[data-ld="2"] {
+.sl-intro [data-ld="1"] { animation: ldInR 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.sl-intro [data-ld="2"] {
   transform-origin: 50% 0%;
   animation: ldUnfold 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) 0.38s both;
 }
-[data-ld="3"] {
-  animation: ldInL 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) 0.56s both;
-}
-[data-ld="4"] {
-  animation: ldRise 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both;
-}
-[data-ld="5"] {
+.sl-intro [data-ld="3"] { animation: ldInL 0.52s cubic-bezier(0.2, 0.8, 0.2, 1) 0.56s both; }
+.sl-intro [data-ld="4"] { animation: ldRise 0.65s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s both; }
+.sl-intro [data-ld="5"] {
   transform-origin: 50% 100%;
   animation: ldDrop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 1.45s both;
 }
 
-@keyframes ldInR {
-  from {
-    transform: translateX(70px);
-    opacity: 0;
+@media (max-width: 760px) {
+  [data-navlink] { display: none !important; }
+  [data-sticky] { position: static !important; }
+  [data-hr] { height: auto !important; }
+  [data-hrsheet] { width: 100% !important; }
+  [data-peek] { display: none !important; }
+  [data-sheets] {
+    display: flex !important;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px !important;
+    margin-right: -16px;
+    padding-right: 16px;
+    scrollbar-width: none;
   }
-  to {
-    transform: none;
-    opacity: 1;
-  }
-}
-@keyframes ldInL {
-  from {
-    transform: translateX(-70px);
-    opacity: 0;
-  }
-  to {
-    transform: none;
-    opacity: 1;
-  }
-}
-@keyframes ldUnfold {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
-}
-@keyframes ldRise {
-  from {
-    transform: translateY(18px);
-    opacity: 0;
-  }
-  to {
-    transform: none;
-    opacity: 1;
-  }
-}
-@keyframes ldDrop {
-  0% {
-    transform: translateY(-60px) rotate(-20deg);
-    opacity: 0;
-  }
-  30% {
-    opacity: 1;
-  }
-  100% {
-    transform: none;
-    opacity: 1;
-  }
-}
-@keyframes ldOut {
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
+  [data-sheets] > * { flex: 0 0 86% !important; scroll-snap-align: start; }
+  [data-lead] { display: none !important; }
+  [data-bars-d] { display: none !important; }
+  [data-bars-m] { display: flex !important; }
 }
 
-/* The global reduced-motion rule shortens durations but not delays, so the
-   overlay would sit there for 2s doing nothing. Skip it outright. */
 @media (prefers-reduced-motion: reduce) {
-  .sl-intro {
-    display: none;
+  [data-fold],
+  [data-stop],
+  .cta,
+  .cta span,
+  .navlink {
+    transition: none !important;
+    transform: none !important;
   }
+  .sl-intro { display: none; }
 }
+
+/* Hours Check: sheets settle, the visit bar draws, sections rise in. */
+@keyframes peekIn {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 0.55; transform: none; }
+}
+@keyframes drawDown {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+@keyframes drawBarY {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+html.hc-motion .hc-rise,
+html.hc-motion .hc-sheet,
+html.hc-motion .hc-peek,
+html.hc-motion [data-hc] [data-stagger] {
+  opacity: 0;
+}
+html.hc-motion .hc-rise { transform: translateY(16px); }
+html.hc-motion .hc-sheet { transform: translateY(56px); }
+html.hc-motion .hc-peek { transform: translateY(36px); }
+html.hc-motion [data-hc] [data-stagger] {
+  transform: translateY(18px);
+  transition:
+    opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html.hc-play .hc-rise,
+html.hc-play .hc-sheet,
+html.hc-play .hc-peek {
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
+}
+html.hc-play .hc-rise { animation-name: riseIn; }
+html.hc-play .hc-rise[data-d="2"] { animation-delay: 0.08s; }
+html.hc-play .hc-rise[data-d="3"] { animation-delay: 0.16s; }
+html.hc-play .hc-rise[data-d="4"] { animation-delay: 0.24s; }
+html.hc-play .hc-peek {
+  animation-name: peekIn;
+  animation-duration: 1.15s;
+  animation-delay: 0.12s;
+}
+html.hc-play .hc-sheet {
+  animation-name: riseIn;
+  animation-duration: 1.2s;
+  animation-delay: 0.28s;
+}
+
+html.hc-motion [data-lead] {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+html.hc-motion [data-hc].hc-in [data-stagger] {
+  opacity: 1;
+  transform: none;
+}
+html.hc-motion [data-hc].hc-in [data-stagger][data-d="2"] { transition-delay: 0.1s; }
+html.hc-motion [data-hc].hc-in [data-stagger][data-d="3"] { transition-delay: 0.2s; }
+html.hc-motion [data-hc].hc-in [data-sheets] > [data-stagger]:hover {
+  transform: translateY(-8px);
+  transition-delay: 0s;
+}
+[data-hc].hc-in [data-lead] {
+  animation: drawDown 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+html.hc-motion [data-bars-d] [data-bar] {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+html.hc-motion [data-bars-m] [data-bar] {
+  transform: scaleY(0);
+  transform-origin: top center;
+}
+[data-hc].hc-in [data-bars-d] [data-bar] {
+  animation: drawRule 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+[data-hc].hc-in [data-bars-m] [data-bar] {
+  animation: drawBarY 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+[data-hc].hc-in [data-bar][data-d="2"] { animation-delay: 0.12s; }
+[data-hc].hc-in [data-bar][data-d="3"] { animation-delay: 0.28s; }
+[data-hc].hc-in [data-bar][data-d="4"] { animation-delay: 0.4s; }

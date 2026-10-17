@@ -6,14 +6,17 @@ const escape = (s: string) =>
 const LOGO_URL = 'https://www.stashlabs.com.au/apple-touch-icon.png';
 
 const STEPS: [string, string][] = [
-  ['We read it properly', 'A real reply from a person, about your actual problem.'],
   [
-    'We say if we are the wrong fit',
-    'If an off-the-shelf tool solves it cheaper, we name the tool.',
+    'We reply',
+    'A real email from one of the three of us, with a few times that suit.',
   ],
   [
-    'Scope in writing before work starts',
-    'A fixed scope, a fixed number, a date. Nothing off a verbal maybe.',
+    'We talk',
+    'On site or on a call. You show us where the time goes.',
+  ],
+  [
+    'You decide',
+    "If it's worth fixing, we'll suggest a fixed-fee systems audit. No obligation.",
   ],
 ];
 
@@ -58,7 +61,7 @@ export function receivedEmail(name: string) {
 </head>
 <body style="margin:0; padding:0; background-color:#EDE8E0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%">
 
-<span style="display:none !important; visibility:hidden; opacity:0; color:transparent; height:0; width:0; overflow:hidden; mso-hide:all">One of us has read it. A real reply is coming within one business day.</span>
+<span style="display:none !important; visibility:hidden; opacity:0; color:transparent; height:0; width:0; overflow:hidden; mso-hide:all">One of us will be in touch within one business day to find a time for your free Hours Check.</span>
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#EDE8E0">
 <tr><td align="center" style="padding:32px 12px 44px">
 
@@ -80,7 +83,7 @@ export function receivedEmail(name: string) {
   </td></tr>
 
   <tr><td class="pad" style="padding:18px 36px 0">
-    <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:26px; mso-line-height-rule:exactly; color:#55504A">No auto-responder after this one. One of us reads what you sent, thinks about it, and writes back within one business day, usually with a question or two before anything else.</p>
+    <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:26px; mso-line-height-rule:exactly; color:#55504A">One of us will be in touch within one business day to find a time for your free Hours Check.</p>
   </td></tr>
 
   <tr><td class="pad" style="padding:30px 36px 0">

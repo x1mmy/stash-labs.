@@ -1,29 +1,39 @@
 import { SiteHeader } from '@/components/SiteHeader';
-import { Hero } from '@/components/Hero';
-import { Familiar } from '@/components/Familiar';
-import { Process } from '@/components/Process';
-import { StayOn } from '@/components/StayOn';
-import { Products } from '@/components/Products';
-import { Studio } from '@/components/Studio';
-import { Faq } from '@/components/Faq';
-import { Contact } from '@/components/Contact';
 import { SiteFooter } from '@/components/SiteFooter';
+import { BookSection } from '@/components/BookForm';
+import {
+  Familiar,
+  HomeFaq,
+  HomeHero,
+  HoursTeaser,
+  HowWeWork,
+  Products,
+  StayOn,
+  Who,
+} from '@/components/landing/Home';
+
+const NAV = [
+  { href: '#how', label: 'How we work' },
+  { href: '#products', label: 'Products' },
+  { href: '#faq', label: 'FAQ' },
+];
 
 export default function Home() {
   return (
-    <div className="text-[17px] leading-[1.6]">
-      <SiteHeader />
+    <>
+      <SiteHeader logoHref="#top" links={NAV} />
       <main>
-        <Hero />
+        <HomeHero />
         <Familiar />
-        <Process />
+        <HowWeWork />
         <StayOn />
+        <HoursTeaser />
         <Products />
-        <Studio />
-        <Faq />
-        <Contact />
+        <Who />
+        <HomeFaq />
+        <BookSection />
       </main>
       <SiteFooter />
-    </div>
+    </>
   );
 }

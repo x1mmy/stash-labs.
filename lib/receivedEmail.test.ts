@@ -20,6 +20,14 @@ test('escapes HTML in the name', () => {
   assert.match(html, /&lt;script&gt;/);
 });
 
+test('describes the Hours Check next steps', () => {
+  const html = receivedEmail('Jordan');
+  assert.match(html, /We reply/);
+  assert.match(html, /We talk/);
+  assert.match(html, /You decide/);
+  assert.doesNotMatch(html, /We read it properly/);
+});
+
 test('points the logo at the live absolute URL', () => {
   const html = receivedEmail('Jordan');
   assert.match(

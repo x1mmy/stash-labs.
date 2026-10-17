@@ -3,6 +3,7 @@ export type ContactPayload = {
   email: string;
   business: string;
   phone: string;
+  format: string;
   message: string;
   topic: string;
 };
@@ -12,6 +13,7 @@ const LIMITS = {
   email: 200,
   business: 160,
   phone: 40,
+  format: 60,
   message: 4000,
   topic: 60,
 } as const;
@@ -45,7 +47,7 @@ export function parseContact(
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return { error: 'That email address does not look right.' };
   }
-  if (!message) return { error: 'Please tell us what is costing you time.' };
+  if (!message) return { error: "Please tell us what's eating your time." };
 
   return {
     name,
@@ -53,6 +55,7 @@ export function parseContact(
     message,
     business: str(b.business, LIMITS.business),
     phone: str(b.phone, LIMITS.phone),
+    format: str(b.format, LIMITS.format),
     topic: str(b.topic, LIMITS.topic) || 'Not sure yet',
   };
 }

@@ -27,10 +27,13 @@ const config: Config = {
         "line-strong": "var(--line-strong)",
       },
       fontFamily: {
-        sans: ["var(--font-plex-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-ibm-plex-sans)", "system-ui", "sans-serif"],
         display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
+        mono: ["var(--font-ibm-plex-mono)", "ui-monospace", "monospace"],
+        wordmark: ["var(--font-epilogue)", "system-ui", "sans-serif"],
         brand: ["var(--font-epilogue)", "system-ui", "sans-serif"],
-        mono: ["var(--font-plex-mono)", "ui-monospace", "monospace"],
+        serif: ["var(--font-instrument-serif)", "Georgia", "serif"],
+        sheet: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
       },
       maxWidth: {
         shell: "1240px",

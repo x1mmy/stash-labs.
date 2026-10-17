@@ -1,19 +1,21 @@
-'use client';
+import { Mark } from '@/components/Wordmark';
 
-import { ThinkingOrb } from 'thinking-orbs';
-
-/**
- * The one loading screen for the whole site and the ops portal. The orb reads
- * the live theme off the `light`/`dark` class the boot script puts on <html>.
- */
+/** In-page hold for route transitions. The full-screen entry lives in Intro. */
 export function Loader({ label = 'Loading' }: { label?: string }) {
   return (
     <div
-      className="flex min-h-[60dvh] w-full items-center justify-center"
+      className="flex min-h-[60dvh] w-full items-center justify-center text-ink"
       aria-busy="true"
       aria-live="polite"
+      aria-label={label}
     >
-      <ThinkingOrb state="solving" size={64} aria-label={label} />
+      <span className="inline-flex items-center gap-3">
+        <Mark className="h-10 w-10" />
+        <span className="font-wordmark text-[28px] font-extrabold tracking-[-.04em]">
+          stash
+          <span className="ml-[.24em] font-normal tracking-[-.02em]">labs</span>
+        </span>
+      </span>
     </div>
   );
 }

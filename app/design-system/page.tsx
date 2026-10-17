@@ -39,11 +39,8 @@ const TYPE_SCALE = [
 
 const MOTION = [
   { name: 'riseIn', spec: '0.8-0.9s · staggered 0.1s', use: 'Above-fold entrance, on load.' },
-  { name: 'data-reveal', spec: '1s · 28px rise', use: 'Scroll entry, armed by ScrollFx.' },
-  { name: 'drawRule', spec: '1.1s · origin-left scaleX', use: 'Hairlines drawing themselves in.' },
-  { name: 'fillRow', spec: '5.4s · infinite', use: 'Product demo bars filling.' },
+  { name: 'drawRule', spec: '0.8s · origin-left scaleX', use: 'A bar drawing itself in.' },
   { name: 'blink', spec: '2.4s · infinite', use: 'The live status dot. Nothing else blinks.' },
-  { name: 'ticker', spec: 'linear · infinite', use: 'The marquee strip only.' },
 ];
 
 const VOICE = [
@@ -363,8 +360,7 @@ export default function DesignSystem() {
             <strong className="font-semibold text-ink">Non-negotiable:</strong>{' '}
             everything collapses under{' '}
             <span className="font-mono text-[.9em]">prefers-reduced-motion</span>,
-            and content renders without JS. Reveals are armed by ScrollFx, so a
-            failed script leaves the page visible rather than blank.
+            and content stays visible when JavaScript does not run.
           </p>
         </Section>
 

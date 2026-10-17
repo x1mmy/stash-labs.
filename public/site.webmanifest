@@ -1,7 +1,7 @@
 {
-  "name": "Stash Labs - Building the tech we wished existed",
+  "name": "Stash Labs",
   "short_name": "Stash Labs",
-  "description": "Three students who code, solving real problems for Australian small businesses",
+  "description": "We find the hours your business loses to admin, and get them back.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -14,8 +14,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#FF6B35",
-  "background_color": "#0a0a0a",
+  "theme_color": "#E5522A",
+  "background_color": "#F2EEE7",
   "display": "standalone",
   "start_url": "/",
   "scope": "/"

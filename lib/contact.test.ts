@@ -19,6 +19,7 @@ test('accepts and trims a valid submission', () => {
     message: 'Payroll eats my Sundays.',
     business: 'Ellis Plumbing',
     phone: '',
+    format: '',
     topic: 'A website',
   });
 });

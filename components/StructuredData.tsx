@@ -5,7 +5,7 @@ const structuredData = {
   url: 'https://www.stashlabs.com.au',
   logo: 'https://www.stashlabs.com.au/android-chrome-512x512.png',
   description:
-    'A small team of Sydney engineers. We sit with your team, learn how the work gets done, then connect the tools you already pay for.',
+    'We find the hours your business loses to admin, and get them back. We sit with your team and connect the tools you already pay for.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Sydney',
@@ -26,7 +26,7 @@ const structuredData = {
         '@type': 'SoftwareApplication',
         name: 'TimeTally',
         applicationCategory: 'BusinessApplication',
-        description: 'Digital timesheets for Australian businesses',
+        description: 'Digital timesheets for Australian businesses.',
         url: 'https://www.timetally.com.au/',
         operatingSystem: 'Web',
       },
@@ -35,9 +35,9 @@ const structuredData = {
       '@type': 'Offer',
       itemOffered: {
         '@type': 'Service',
-        name: 'Business systems audit and integration',
+        name: 'Hours Check',
         description:
-          'On-site systems audit, then a fixed-price build connecting the tools a small business already runs.',
+          'A free on-site or video visit that ends with a written report on the hours a business loses to admin.',
         areaServed: 'AU',
       },
     },
