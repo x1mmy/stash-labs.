@@ -114,6 +114,12 @@ export function BookForm() {
   );
 }
 
+const bookingFacts: { label: string; value: string; href?: string }[] = [
+  { label: 'Reply', value: 'Within one business day' },
+  { label: 'Format', value: 'On site (90 min) or video call (60 min)' },
+  { label: 'Or email', value: 'team@stashlabs.com.au', href: 'mailto:team@stashlabs.com.au' },
+];
+
 export function BookSection() {
   return (
     <section id="book" className="bg-surface">
@@ -127,13 +133,7 @@ export function BookSection() {
             Tell us what&apos;s eating your time. We&apos;ll watch how it works and give you the number in writing.
           </p>
           <div className="flex max-w-[420px] flex-col border-b border-line text-[15px]">
-            {(
-              [
-                { label: 'Reply', value: 'Within one business day' },
-                { label: 'Format', value: 'On site (90 min) or video call (60 min)' },
-                { label: 'Or email', value: 'team@stashlabs.com.au', href: 'mailto:team@stashlabs.com.au' },
-              ] as { label: string; value: string; href?: string }[]
-            ).map((fact) => (
+            {bookingFacts.map((fact) => (
               <div
                 key={fact.label}
                 className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-t border-line py-3"

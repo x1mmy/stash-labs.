@@ -1,23 +1,23 @@
 import { ContactCardActions } from '@/components/ContactCardActions';
-import { LogoMark } from '@/components/Logo';
+import { Mark } from '@/components/Wordmark';
 import { CARD } from '@/lib/card';
 
 const rowClass = 'flex justify-between gap-4 border-t border-line py-3';
 const valueClass = 'link-rule font-mono text-[12.5px] text-ink';
 
-/** The card itself. Shared by the header popup and the standalone /card page. */
-export function ContactCard({ heading: Heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
+/** The card itself, rendered on the standalone /card page. */
+export function ContactCard() {
   return (
     <div className="flex flex-col gap-6 p-[clamp(22px,5vw,32px)] text-[17px] leading-[1.6]">
       <div className="eyebrow">{CARD.tagline}</div>
 
       <div className="flex items-center gap-3.5 text-ink">
-        <LogoMark size={44} />
-        <Heading className="m-0 inline-flex items-baseline font-brand text-[34px] font-extrabold leading-none tracking-[-.04em]">
+        <Mark className="h-11 w-11" />
+        <h1 className="m-0 inline-flex items-baseline font-wordmark text-[34px] font-extrabold leading-none tracking-[-.04em]">
           stash
           <span className="ml-[.24em] font-normal tracking-[-.02em]">labs</span>
           <span className="sr-only">contact card</span>
-        </Heading>
+        </h1>
       </div>
 
       <p className="m-0 max-w-[36ch] text-pretty text-base text-ink-2">

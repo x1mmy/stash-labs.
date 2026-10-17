@@ -31,7 +31,6 @@ const config: Config = {
         display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
         mono: ["var(--font-ibm-plex-mono)", "ui-monospace", "monospace"],
         wordmark: ["var(--font-epilogue)", "system-ui", "sans-serif"],
-        brand: ["var(--font-epilogue)", "system-ui", "sans-serif"],
         serif: ["var(--font-instrument-serif)", "Georgia", "serif"],
         sheet: ["var(--font-jetbrains-mono)", "ui-monospace", "monospace"],
       },

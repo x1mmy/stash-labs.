@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactCard } from '@/components/ContactCard';
-import { Logo } from '@/components/Logo';
+import { Wordmark } from '@/components/Wordmark';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { CARD, CARD_PATH } from '@/lib/card';
 
@@ -38,7 +38,7 @@ export default function CardPage() {
     <div className="flex min-h-screen flex-col">
       <header className="border-b border-line">
         <div className="shell flex items-center justify-between gap-4 py-4">
-          <Logo href="/" />
+          <Wordmark href="/" />
           <span className="font-mono text-[11.5px] uppercase tracking-[.09em] text-ink-2">
             Sydney, AU
           </span>
@@ -47,7 +47,7 @@ export default function CardPage() {
 
       <main className="shell flex flex-1 items-center justify-center py-[clamp(24px,6vw,72px)]">
         <div className="w-full max-w-[440px] rounded-sm border border-line-strong bg-surface [animation:riseIn_.8s_cubic-bezier(.16,1,.3,1)_both]">
-          <ContactCard heading="h1" />
+          <ContactCard />
         </div>
       </main>
 
