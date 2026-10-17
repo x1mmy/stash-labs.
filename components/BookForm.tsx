@@ -132,7 +132,7 @@ export function BookSection() {
                 { label: 'Reply', value: 'Within one business day' },
                 { label: 'Format', value: 'On site (90 min) or video call (60 min)' },
                 { label: 'Or email', value: 'team@stashlabs.com.au', href: 'mailto:team@stashlabs.com.au' },
-              ] as const
+              ] as { label: string; value: string; href?: string }[]
             ).map((fact) => (
               <div
                 key={fact.label}
