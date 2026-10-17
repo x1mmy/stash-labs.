@@ -45,10 +45,10 @@ function Page1() {
       <div className="mt-24 text-[17px]" style={{ color: muted }}>
         Prepared for Example Lawn Co.
       </div>
-      <h1 className="m-0 mt-3.5 text-[52px] font-semibold leading-[1.02] tracking-[-.035em]">
+      <p className="m-0 mt-3.5 text-[52px] font-semibold leading-[1.02] tracking-[-.035em]">
         Where your hours go
         <span className="font-serif font-normal italic text-[#E5522A]">.</span>
-      </h1>
+      </p>
       <div className="mt-16 pt-[26px]" style={{ borderTop: `1px solid ${rule}` }}>
         <div className="text-[15px]" style={{ color: muted }}>
           What repeated admin costs you each year

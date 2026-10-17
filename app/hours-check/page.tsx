@@ -65,7 +65,7 @@ export default function HoursCheckPage() {
                 Find out <span className="text-accent">what your admin costs</span>.
               </h1>
               <p data-d="3" className="hc-rise m-0 max-w-[42ch] text-pretty text-[clamp(17px,1.4vw,19px)] text-ink-2">
-                We spend an hour or two with your team, then hand you a written report with a dollar figure on the hours you lose to admin.
+                Find out what your admin costs. We spend an hour or two with your team, then hand you a written report with a dollar figure on the hours you lose.
               </p>
               <div data-d="4" className="hc-rise flex flex-wrap items-center gap-5">
                 <a

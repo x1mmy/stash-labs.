@@ -57,7 +57,7 @@ export function HomeHero() {
             <span className="text-accent">.</span>
           </h1>
           <p className="m-0 max-w-[50ch] text-pretty text-[clamp(17px,1.4vw,19px)] text-ink-2">
-            We sit with your team, find where the hours go, and connect the tools you already pay for. No new platform. No lock-in.
+            We sit with your team, find the hours your business loses to admin, and get them back by connecting the tools you already pay for. Hours Check for the written report. TimeTally for digital timesheets. No new platform. No lock-in.
           </p>
           <div className="flex flex-wrap items-center gap-5">
             <a
@@ -272,9 +272,9 @@ export function Products() {
                 <span>01 · Live</span>
               </div>
               <div className="flex flex-col gap-3.5">
-                <div className="font-wordmark text-[clamp(44px,5.4vw,76px)] font-extrabold leading-[.95] tracking-[-.04em]">
+                <h3 className="m-0 font-wordmark text-[clamp(44px,5.4vw,76px)] font-extrabold leading-[.95] tracking-[-.04em]">
                   TimeTally
-                </div>
+                </h3>
                 <span className="inline-flex items-center gap-[7px] text-sm text-ink-2">
                   by
                   <Mark className="h-3.5 w-3.5" />

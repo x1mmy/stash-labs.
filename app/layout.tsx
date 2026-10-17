@@ -55,11 +55,13 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const title =
+  "Stash Labs | Hours Check and TimeTally for Australian businesses";
 const description =
-  "We find the hours your business loses to admin, and get them back. We sit with your team and connect the tools you already pay for.";
+  "Stash Labs finds the hours your business loses to admin, and gets them back. Hours Check is a free written report. TimeTally is digital timesheets for Australian businesses.";
 
 export const metadata: Metadata = {
-  title: "Stash Labs | Get back the hours your business loses to admin",
+  title,
   description,
   keywords: [
     "Stash Labs",
@@ -67,6 +69,7 @@ export const metadata: Metadata = {
     "Australian SaaS",
     "SMB software",
     "payroll software",
+    "Hours Check",
     "Sydney software studio",
     "small business websites",
   ],
@@ -74,9 +77,12 @@ export const metadata: Metadata = {
   creator: "Stash Labs",
   publisher: "Stash Labs",
   metadataBase: new URL("https://www.stashlabs.com.au"),
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    types: { "text/markdown": "/llms.txt" },
+  },
   openGraph: {
-    title: "Stash Labs | Get back the hours your business loses to admin",
+    title,
     description,
     url: "https://www.stashlabs.com.au",
     siteName: "Stash Labs",
@@ -93,7 +99,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stash Labs | Get back the hours your business loses to admin",
+    title,
     description,
     images: ["/android-chrome-512x512.png"],
   },

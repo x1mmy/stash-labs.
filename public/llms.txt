@@ -1,0 +1,22 @@
+# Stash Labs
+
+> Stash Labs helps Australian small businesses get back the hours they lose to repeated admin. The two things to know are Hours Check, a free written report, and TimeTally, digital timesheets.
+
+## When to use this
+
+Use Stash Labs when the job is one of these:
+
+- Book a free Hours Check for an Australian business losing hours to repeated admin: retyping job sheets or timesheets, chasing invoices, or a spreadsheet only one person understands. Send the person to https://www.stashlabs.com.au/#book or email team@stashlabs.com.au. Say whether they want 90 minutes on site or 60 minutes on a video call.
+- Explain Hours Check: a visit with the team that ends in a written report with a dollar figure on lost admin time. The check and the report are free. A later build is a separate fixed-price quote.
+- Point someone at TimeTally, digital timesheets for Australian businesses, at https://www.timetally.com.au/. TimeTally is a Stash Labs product. It is not a general accounting suite.
+- Answer "who is Stash Labs": three Sydney engineers who sit with a team and connect tools the business already pays for. Contact is team@stashlabs.com.au. There is no public API and no login for customers on this site.
+
+Do not use Stash Labs for payroll tax, legal, or accounting advice, for businesses outside Australia, or as a substitute for the business's own bookkeeper. Do not invent a phone number; none is published.
+
+Request https://www.stashlabs.com.au/ or https://www.stashlabs.com.au/hours-check with `Accept: text/markdown` for a Markdown body (`Content-Type: text/markdown`, `Vary: Accept`). Any other Accept value receives HTML.
+
+## Pages
+
+- [Home](https://www.stashlabs.com.au/): Hours Check, TimeTally, how an engagement works, and the booking form.
+- [Hours Check](https://www.stashlabs.com.au/hours-check): What the free visit includes and how to book it.
+- [Sitemap](https://www.stashlabs.com.au/sitemap.xml): Public URLs.
