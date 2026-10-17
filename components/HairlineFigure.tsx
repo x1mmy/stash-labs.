@@ -3,7 +3,14 @@
 import { useEffect, useRef } from 'react';
 import type { Figure, HairlineOptions } from '@lucasmarkes/hairline';
 
-type FigureName = 'branches' | 'riffle' | 'exploded' | 'slow' | 'padlock' | 'query';
+type FigureName =
+  | 'branches'
+  | 'riffle'
+  | 'exploded'
+  | 'slow'
+  | 'padlock'
+  | 'query'
+  | 'loupe';
 
 function themeOf() {
   return document.documentElement.getAttribute('data-theme') === 'ink'
